@@ -1,0 +1,8 @@
+[package]
+name = "arithmetic"
+version = "0.0.1"
+authors = ["Peter Jin <peterhaijin@gmail.com>"]
+
+[lib]
+name = "arithmetic"
+path = "src/lib.rs"

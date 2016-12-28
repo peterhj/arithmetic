@@ -1,35 +1,46 @@
 use std::ops::{Neg, Add, Sub, Mul, Div};
 
-pub trait Ring: Sized + Neg<Output=Self> + Add<Output=Self> + Sub<Output=Self> + Mul<Output=Self> {
+pub trait PseudoRing: Sized + Neg<Output=Self> + Add<Output=Self> + Sub<Output=Self> + Mul<Output=Self> {
   fn zero() -> Self;
+  fn mag(self) -> Self;
 }
 
-pub trait Field: Sized + Ring + Div<Output=Self> {
+pub trait PseudoField: Sized + PseudoRing + Div<Output=Self> {
   fn one() -> Self;
 }
 
-impl Ring for f32 {
+impl PseudoRing for f32 {
   #[inline]
   fn zero() -> f32 {
     0.0
   }
+
+  #[inline]
+  fn mag(self) -> f32 {
+    self.abs()
+  }
 }
 
-impl Ring for f64 {
+impl PseudoRing for f64 {
   #[inline]
   fn zero() -> f64 {
     0.0
   }
+
+  #[inline]
+  fn mag(self) -> f64 {
+    self.abs()
+  }
 }
 
-impl Field for f32 {
+impl PseudoField for f32 {
   #[inline]
   fn one() -> f32 {
     1.0
   }
 }
 
-impl Field for f64 {
+impl PseudoField for f64 {
   #[inline]
   fn one() -> f64 {
     1.0
